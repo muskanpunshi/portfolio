@@ -170,7 +170,7 @@ export default function ContactSection() {
                 <span className="font-bold text-green-900">Available for Work</span>
               </div>
               <p className="text-sm text-green-700">
-                Currently accepting new projects and opportunities
+                Currently accepting new projects and opportunities and nothing
               </p>
             </div>
 
