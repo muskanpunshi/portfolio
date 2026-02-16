@@ -18,8 +18,17 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/*"],
+      "@public/*": ["public/*"],
+      "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"],
+      "@shapes/*": ["components/shapes/*"],
+      "@cms/*": ["components/CMS/*"],
+      "@context/*": ["context/*"],
+      "@lib/*": ["lib/*"]
     }
   },
   "include": [
@@ -28,7 +37,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    "components/projectSection.tss"
   ],
   "exclude": ["node_modules"]
 }
