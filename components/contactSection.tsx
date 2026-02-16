@@ -62,16 +62,8 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative bg-white py-32 px-8 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.3]">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `radial-gradient(circle, #000 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
+     
+
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}

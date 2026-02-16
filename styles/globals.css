@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 999;
+}
+
 :root {
   --color-primary: #7B0D1E;
   --color-primary-dark: #4A0712;

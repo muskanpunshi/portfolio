@@ -22,7 +22,7 @@ export default function AboutSection() {
         transition={{ duration: 0.8 }}
         className="max-w-3xl mx-auto"
       >
-        <h2 className=" font-bold mb-6 text-[clamp(5rem,8vw,8rem)]">About Me</h2>
+        <h2 className="  mb-6 text-[clamp(5rem,8vw,8rem)]">About Me</h2>
         <p className="text-gray-700 mb-4 leading-relaxed">
           Hi! I’m <span className="font-semibold">XYZ</span>, a Frontend
           Developer passionate about crafting interactive and visually appealing

@@ -1,4 +1,5 @@
 "use client";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Briefcase, Award, GraduationCap } from "lucide-react";
@@ -8,14 +9,7 @@ import { Briefcase, Award, GraduationCap } from "lucide-react";
 // ----------------------
 
 type TimelineType = "work" | "award" | "education";
-
-type TimelineColor =
-  | "red"
-  | "yellow"
-  | "blue"
-  | "purple"
-  | "green"
-  | "indigo";
+type TimelineColor = "red" | "yellow" | "blue" | "purple" | "green" | "indigo";
 
 interface TimelineItemData {
   year: string;
@@ -48,14 +42,14 @@ const timelineData: TimelineItemData[] = [
     company: "TechCorp Inc.",
     location: "San Francisco, CA",
     description:
-      "Leading frontend architecture for enterprise SaaS platform. Managing team of 5 developers and implementing design system.",
+      "Leading frontend architecture for enterprise SaaS platform. Managing team of 5 developers and implementing design systems.",
     achievements: [
-      "Reduced bundle size by 40% through code splitting",
-      "Implemented micro-frontend architecture",
-      "Mentored 3 junior developers",
+      "Reduced bundle size by 40%",
+      "Implemented micro-frontends",
+      "Mentored junior developers"
     ],
     logo: "🚀",
-    color: "red",
+    color: "red"
   },
   {
     year: "2023",
@@ -63,9 +57,9 @@ const timelineData: TimelineItemData[] = [
     title: "Best Developer Portfolio",
     company: "Awwwards",
     description:
-      "Recognized for exceptional portfolio design and innovative use of WebGL and animations.",
+      "Recognized for exceptional portfolio design and creative frontend engineering.",
     logo: "🏆",
-    color: "yellow",
+    color: "yellow"
   },
   {
     year: "2022-2023",
@@ -74,14 +68,14 @@ const timelineData: TimelineItemData[] = [
     company: "StartupXYZ",
     location: "Remote",
     description:
-      "Built and shipped multiple products from 0 to 1. Focused on performance optimization and user experience.",
+      "Built multiple products from scratch with a strong focus on performance and UX.",
     achievements: [
-      "Shipped 3 major product releases",
+      "Shipped 3 major releases",
       "Improved Core Web Vitals by 60%",
-      "Built component library used across 5 products",
+      "Created shared component library"
     ],
     logo: "💡",
-    color: "blue",
+    color: "blue"
   },
   {
     year: "2022",
@@ -89,25 +83,9 @@ const timelineData: TimelineItemData[] = [
     title: "Advanced React Patterns",
     company: "Frontend Masters",
     description:
-      "Completed advanced coursework in React architecture, performance optimization, and state management.",
+      "Advanced coursework in React architecture and performance optimization.",
     logo: "📚",
-    color: "purple",
-  },
-  {
-    year: "2021-2022",
-    type: "work",
-    title: "Junior Frontend Developer",
-    company: "Digital Agency Co.",
-    location: "New York, NY",
-    description:
-      "Developed responsive websites and web applications for various clients across different industries.",
-    achievements: [
-      "Delivered 15+ client projects on time",
-      "Improved team workflow with custom CLI tools",
-      "Achieved 98% client satisfaction rate",
-    ],
-    logo: "🎨",
-    color: "green",
+    color: "purple"
   },
   {
     year: "2021",
@@ -115,10 +93,10 @@ const timelineData: TimelineItemData[] = [
     title: "B.S. Computer Science",
     company: "University Name",
     description:
-      "Graduated with honors. Specialized in web technologies and human-computer interaction.",
+      "Graduated with honors. Specialized in web technologies.",
     logo: "🎓",
-    color: "indigo",
-  },
+    color: "indigo"
+  }
 ];
 
 // ----------------------
@@ -130,64 +108,71 @@ export default function Timeline() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"],
+    offset: ["start start", "end end"]
   });
 
+  // Parallax background movement
+const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
+
+  // Timeline line growth
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const colorMap: Record<TimelineColor, string> = {
-    red: "bg-red-700",
+    red: "bg-red-600",
     yellow: "bg-yellow-500",
     blue: "bg-blue-600",
     purple: "bg-purple-600",
     green: "bg-green-600",
-    indigo: "bg-indigo-600",
+    indigo: "bg-indigo-600"
   };
 
   return (
-    <section ref={containerRef} className="bg-white py-32 px-8 relative">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
+    <section
+      ref={containerRef}
+      className="relative py-40 px-6 overflow-hidden bg-neutral-950 text-white"
+    >
+      {/* ---------------- PARALLAX BACKGROUND ---------------- */}
+      <motion.div
+        style={{ y: bgY }}
+        className="absolute inset-0 -z-10"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_40%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.05),transparent_40%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-900/60 to-neutral-950" />
+      </motion.div>
+
+      <div className="max-w-6xl mx-auto relative">
+        {/* ---------------- HEADER ---------------- */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-32"
+          transition={{ duration: 0.8 }}
+          className="mb-40"
         >
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-24 h-1 bg-red-700 mb-8 origin-left"
-          />
-
-          <h2 className="text-[clamp(3rem,8vw,8rem)] font-black leading-none tracking-tight mb-6">
+          <h2 className="text-[clamp(3rem,8vw,7rem)] font-black tracking-tight">
             Journey
           </h2>
-
-          <p className="text-xl text-gray-600 max-w-2xl">
-            My professional path from student to senior developer, marked by
-            continuous learning and impactful projects.
+          <div className="w-24 h-1 bg-red-600 mt-6 mb-8" />
+          <p className="text-lg text-neutral-400 max-w-2xl">
+            A timeline of growth, learning, and meaningful work.
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* ---------------- TIMELINE ---------------- */}
         <div className="relative">
-          {/* Animated Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200">
+          {/* Vertical Line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-neutral-700">
             <motion.div
-              className="w-full bg-red-700 origin-top"
               style={{ height: lineHeight }}
+              className="origin-top w-full bg-gradient-to-b from-red-500 via-red-400 to-transparent shadow-[0_0_20px_rgba(239,68,68,0.7)]"
             />
           </div>
 
-          {/* Timeline Items */}
-          <div className="space-y-24">
+          <div className="space-y-32">
             {timelineData.map((item, index) => (
               <TimelineItem
-                key={`${item.year}-${index}`}
+                key={index}
                 item={item}
                 index={index}
                 isLeft={index % 2 === 0}
@@ -206,143 +191,95 @@ export default function Timeline() {
 // ----------------------
 
 function TimelineItem({ item, index, isLeft, colorClass }: TimelineItemProps) {
-  const itemRef = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
-    target: itemRef,
-    offset: ["start end", "center center"],
+    target: ref,
+    offset: ["start end", "center center"]
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0.85, 1]);
   const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const getIcon = () => {
-    switch (item.type) {
-      case "work":
-        return <Briefcase className="w-5 h-5" />;
-      case "award":
-        return <Award className="w-5 h-5" />;
-      case "education":
-        return <GraduationCap className="w-5 h-5" />;
-      default:
-        return null;
-    }
+  const iconMap = {
+    work: <Briefcase />,
+    award: <Award />,
+    education: <GraduationCap />
   };
 
   return (
     <motion.div
-      ref={itemRef}
+      ref={ref}
       style={{ scale, opacity }}
-      className={`relative grid md:grid-cols-2 gap-8 items-center ${
-        isLeft ? "" : "md:direction-rtl"
-      }`}
+      className={`relative grid md:grid-cols-2 gap-12 items-center`}
     >
-      {/* Content */}
+      {/* Content Card */}
       <motion.div
-        initial={{ x: isLeft ? -50 : 50, opacity: 0 }}
-        whileInView={{ x: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className={`${isLeft ? "md:text-right" : "md:text-left"} ${
-          isLeft ? "" : "md:order-2"
+        whileHover={{ y: -6 }}
+        className={`relative rounded-3xl p-10 backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.6)] ${
+          isLeft ? "md:text-right" : ""
         }`}
       >
-        {/* Year Badge */}
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className={`inline-block px-4 py-2 ${colorClass} text-white rounded-full font-bold text-sm mb-4`}
+        <span
+          className={`inline-block mb-4 px-4 py-1 text-sm font-bold rounded-full ${colorClass}`}
         >
           {item.year}
-        </motion.div>
+        </span>
 
-        {/* Title & Company */}
-        <h3 className="text-3xl md:text-4xl font-black mb-2 text-gray-900">
+        <h3 className="text-3xl font-extrabold tracking-tight mb-2">
           {item.title}
         </h3>
 
-        <div className="flex items-center gap-2 text-lg text-gray-600 mb-4 justify-start md:justify-end">
-          <span className="font-semibold">{item.company}</span>
+        <p className="italic text-neutral-400 mb-6">
+          {item.company} {item.location && `• ${item.location}`}
+        </p>
 
-          {item.location && (
-            <>
-              <span className="text-gray-400">•</span>
-              <span>{item.location}</span>
-            </>
-          )}
-        </div>
-
-        {/* Description */}
-        <p className="text-gray-700 leading-relaxed mb-6 max-w-md ml-auto">
+        <p className="text-neutral-300 leading-relaxed mb-6">
           {item.description}
         </p>
 
-        {/* Achievements */}
         {item.achievements && (
-          <ul className={`space-y-2 ${isLeft ? "md:items-end" : ""}`}>
-            {item.achievements.map((achievement, i) => (
-              <motion.li
-                key={i}
-                initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.1 }}
-                className="flex items-start gap-2 text-sm text-gray-600"
-              >
-                <span
-                  className={`mt-1 w-1.5 h-1.5 ${colorClass} rounded-full flex-shrink-0`}
-                />
-                {achievement}
-              </motion.li>
+          <ul className="space-y-2 text-sm text-neutral-400">
+            {item.achievements.map((a, i) => (
+              <li key={i}>• {a}</li>
             ))}
           </ul>
         )}
       </motion.div>
 
       {/* Center Dot */}
-      <div className="absolute left-8 md:left-1/2 top-0 -translate-x-1/2 z-10">
+      <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-10">
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
-          transition={{
-            duration: 0.5,
-            delay: index * 0.1,
-            type: "spring",
-            stiffness: 200,
-          }}
-          className={`w-16 h-16 ${colorClass} rounded-full flex items-center justify-center text-white shadow-lg relative`}
+          transition={{ type: "spring", stiffness: 200 }}
+          className={`w-16 h-16 rounded-full ${colorClass} flex items-center justify-center shadow-xl`}
         >
-          <div className="text-2xl">{item.logo}</div>
+          <span className="text-2xl">{item.logo}</span>
 
-          {/* Pulse Effect */}
+          {/* Shockwave */}
           <motion.div
-            className={`absolute inset-0 ${colorClass} rounded-full`}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.5, 0, 0.5],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            initial={{ scale: 1, opacity: 0.5 }}
+            whileInView={{ scale: 1.8, opacity: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className={`absolute inset-0 rounded-full ${colorClass}`}
           />
         </motion.div>
       </div>
 
-      {/* Icon */}
-      <div className={`hidden md:block ${isLeft ? "md:order-2" : ""}`}>
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          whileInView={{ scale: 1, rotate: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: index * 0.1, type: "spring" }}
-          whileHover={{ rotate: 5, scale: 1.05 }}
-          className={`w-32 h-32 ${colorClass} rounded-3xl flex items-center justify-center text-white shadow-xl ml-auto`}
-        >
-          {getIcon()}
-        </motion.div>
-      </div>
+      {/* Icon Box */}
+      <motion.div
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        whileHover={{ rotate: -5, scale: 1.1 }}
+        className={`hidden md:flex w-32 h-32 rounded-3xl ${colorClass} items-center justify-center text-white shadow-2xl ${
+          isLeft ? "md:order-2 ml-auto" : ""
+        }`}
+      >
+        {iconMap[item.type]}
+      </motion.div>
     </motion.div>
   );
 }
