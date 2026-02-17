@@ -6,12 +6,12 @@ import HeroSection from "@components/hero";
 import JourneySection from "@components/journeySection";
 import { FloatingNav } from "@components/layout/floatingNav";
 import GlobalParallax from "@components/layout/globalParallax";
-import TopMenu from "@components/layout/topMenu";
+import TopMenu from "@components/layout/header";
 import ProjectsSection from "@components/projectsSection";
 
 export default function Home() {
   return (
-    <GlobalParallax>
+    // <GlobalParallax>
     <div className="min-h-screen my-auto relative">
       <div className="absolute inset-0 opacity-[0.3]">
         <div
@@ -22,8 +22,8 @@ export default function Home() {
           }}
         />
       </div>
-      <TopMenu />
-      <FloatingNav />
+     
+      {/* <FloatingNav /> */}
 
       <main className="">
         <HeroSection />
@@ -32,7 +32,7 @@ export default function Home() {
         <ProjectsSection />
         <ContactSection />
       </main>
+      {/* </GlobalParallax> */}
     </div>
-    </GlobalParallax>
   );
 }

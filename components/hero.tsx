@@ -5,13 +5,20 @@ import LetterHoverText from "./animatedWord";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-[#7B0D1E] text-white overflow-hidden" id="home">
+    // <section className="relative min-h-screen bg-[#7B0D1E] text-white overflow-hidden" id="home">
 
-   
-
+    <section
+      id="home"
+      className="relative min-h-screen text-yellow overflow-hidden"
+      style={{
+        background: `
+      radial-gradient(1200px at 90% 30%, rgba(255,255,255,0.06), transparent 60%),
+      linear-gradient(10deg, #7B0D1E 0%, #5E0A18 100%)
+    `
+      }}
+    >
       {/* Center Content */}
       <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-
         {/* Huge Title */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -27,13 +34,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.9 }}
-          className="mt-10 max-w-xl text-sm tracking-wide text-white/60 uppercase leading-relaxed"
+          className="mt-12 max-w-xl text-[13px] tracking-[0.18em] text-white/55 uppercase leading-[1.9]"
         >
           We are a creative studio specialized in strategy, branding, design,
           and development. Our work lives at the intersection of design and
           technology.
         </motion.p>
-  <motion.div
+        <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
@@ -49,7 +56,16 @@ export default function HeroSection() {
         className="absolute bottom-8 left-8 flex items-center gap-2 text-sm text-white/70"
       >
         <span>Scroll to Explore</span>
-        <span className="animate-bounce">⌄</span>
+        <motion.span
+          animate={{ y: [0, 8, 0] }}
+          transition={{
+            duration: 2.2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          ⌄
+        </motion.span>{" "}
       </motion.div>
 
       {/* Bottom Right */}
@@ -163,7 +179,7 @@ export default function HeroSection() {
 //         </motion.p>
 
 //         {/* Decorative Line */}
-      
+
 //       </div>
 
 //       {/* Bottom Left Scroll */}
@@ -230,4 +246,3 @@ export default function HeroSection() {
 //     </section>
 //   );
 // }
-

@@ -1,6 +1,7 @@
 import "styles/globals.css";
 import { ReactNode } from "react";
-import { Inter, Sora, Six_Caps,Raleway } from "next/font/google";
+import { Inter, Sora, Six_Caps, Raleway } from "next/font/google";
+import WebLayout from "@components/layout/layout";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora" });
@@ -17,9 +18,9 @@ const raleway = Raleway({
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${raleway.variable}`}>
-      <body className={`bg-color-background dark:bg-background  `}>
-        {children}
+    <html lang="en">
+      <body className={` `}>
+        <WebLayout>{children} </WebLayout>
       </body>
     </html>
   );
