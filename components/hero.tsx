@@ -2,14 +2,29 @@
 
 import { motion } from "framer-motion";
 import LetterHoverText from "./animatedWord";
+import useScrollSections from "@lib/hooks/useScrollSections";
+import Container from "./layout/container";
 
 export default function HeroSection() {
-  return (
-    // <section className="relative min-h-screen bg-[#7B0D1E] text-white overflow-hidden" id="home">
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
 
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
+  useScrollSections();
+
+  return (
     <section
       id="home"
-      className="relative min-h-screen text-yellow overflow-hidden"
+      data-scroll="1"
+   
+      className="relative h-screen overflow-hidden  "
       style={{
         background: `
       radial-gradient(1200px at 90% 30%, rgba(255,255,255,0.06), transparent 60%),
@@ -17,232 +32,88 @@ export default function HeroSection() {
     `
       }}
     >
-      {/* Center Content */}
-      <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        {/* Huge Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="leading-none"
-        >
-          <LetterHoverText text="MONTOYA" />
-        </motion.div>
+      <Container className="h-full">
+        {/* ✅ FIX 1 cont: changed min-h-screen → h-full so it matches the section */}
+        <div className="flex h-full flex-col items-center  justify-center px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="leading-none"
+          >
+            <LetterHoverText text="MONTOYA" />
+          </motion.div>
 
-        {/* Subtitle */}
-        <motion.p
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.9 }}
+            className="mt-12 max-w-xl text-[13px] tracking-[0.18em] text-white/55 uppercase leading-[1.9]"
+          >
+            We are a creative studio specialized in strategy, branding, design,
+            and development. Our work lives at the intersection of design and
+            technology.
+          </motion.p>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mt-8 w-24 h-[2px] bg-white/30"
+          />
+        </div>
+
+        {/* Scroll To Explore */}
+        <motion.button
+          onClick={() => scrollToSection("about")}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.9 }}
-          className="mt-12 max-w-xl text-[13px] tracking-[0.18em] text-white/55 uppercase leading-[1.9]"
+          transition={{ delay: 0.6 }}
+          whileHover={{ scale: 1.05 }}
+          className="absolute bottom-10 left-10 flex flex-col items-center gap-3 group cursor-pointer  "
         >
-          We are a creative studio specialized in strategy, branding, design,
-          and development. Our work lives at the intersection of design and
-          technology.
-        </motion.p>
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-8 w-24 h-[2px] bg-white/30"
-        />
-      </div>
+          <div className="relative w-10.5 h-10.5 rounded-full border border-white/40 flex justify-center overflow-hidden ">
+            <motion.div
+              animate={{ y: [-8, 10, -8] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="w-[8px] h-[8px] bg-white rounded-full mt-2"
+            />
+          </div>
 
-      {/* Bottom Left Scroll */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-        className="absolute bottom-8 left-8 flex items-center gap-2 text-sm text-white/70"
-      >
-        <span>Scroll to Explore</span>
-        <motion.span
-          animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 2.2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          <span className="text-xs tracking-[0.25em] uppercase text-white/70 group-hover:text-white transition">
+            Scroll
+          </span>
+        </motion.button>
+
+        <motion.button
+          onClick={() => scrollToSection("projects")}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          whileHover={{ x: 6 }}
+          className="absolute bottom-10 right-10 flex items-center gap-3 text-sm text-white/50 group"
         >
-          ⌄
-        </motion.span>{" "}
-      </motion.div>
+          <span className="tracking-widest uppercase group-hover:text-white transition">
+            Featured Projects
+          </span>
 
-      {/* Bottom Right */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-        className="absolute bottom-8 right-8 text-sm text-white/70"
-      >
-        Featured Projects
-      </motion.div>
+          <motion.span
+            animate={{ x: [0, 6, 0] }}
+            whileHover={{ y: 6 }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            →
+          </motion.span>
+        </motion.button>
+      </Container>
     </section>
   );
 }
-// "use client";
-
-// import { motion } from "framer-motion";
-// import React from "react";
-// import { JSX } from 'react';
-// // Props type for LetterHoverText
-// type LetterHoverTextProps = {
-//   text: string;
-// };
-
-// // Letter Hover Component
-// function LetterHoverText({ text }: LetterHoverTextProps): JSX.Element {
-//   return (
-//     <h1 className="flex leading-none tracking-[0.02em] text-[clamp(4rem,15vw,10rem)]">
-//       {text.split("").map((letter, idx) => (
-//         <motion.span
-//           key={idx}
-//           className="inline-block origin-bottom font-black"
-//           whileHover={{ scaleY: 1.3 }}
-//           transition={{
-//             duration: 0.6,
-//             ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-//           }}
-//         >
-//           {letter}
-//         </motion.span>
-//       ))}
-//     </h1>
-//   );
-// }
-
-// export default function HeroSection(): JSX.Element {
-//   return (
-//     <section
-//       className="relative min-h-screen bg-[#7B0D1E] text-white overflow-hidden"
-//       id="home"
-//     >
-//       {/* Animated Background Shapes */}
-//       <motion.div
-//         className="absolute top-1/4 right-[10%] w-[400px] h-[400px] rounded-full"
-//         style={{
-//           background:
-//             "radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%)",
-//         }}
-//         animate={{
-//           scale: [1, 1.3, 1],
-//           x: [0, 50, 0],
-//           y: [0, -30, 0],
-//         }}
-//         transition={{
-//           duration: 20,
-//           repeat: Infinity,
-//           ease: "easeInOut",
-//         }}
-//       />
-
-//       <motion.div
-//         className="absolute bottom-1/4 left-[15%] w-[300px] h-[300px] rounded-full"
-//         style={{
-//           background:
-//             "radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%)",
-//         }}
-//         animate={{
-//           scale: [1.2, 1, 1.2],
-//           x: [0, -40, 0],
-//           y: [0, 40, 0],
-//         }}
-//         transition={{
-//           duration: 15,
-//           repeat: Infinity,
-//           ease: "easeInOut",
-//         }}
-//       />
-
-//       {/* Center Content */}
-//       <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
-//         {/* Huge Title with Letter Hover */}
-//         <motion.div
-//           initial={{ opacity: 0, y: 60 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 1, ease: "easeOut" }}
-//           className="leading-none"
-//         >
-//           <LetterHoverText text="MONTOYA" />
-//         </motion.div>
-
-//         {/* Subtitle */}
-//         <motion.p
-//           initial={{ opacity: 0, y: 30 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ delay: 0.3, duration: 0.9 }}
-//           className="mt-10 max-w-xl text-sm tracking-wide text-white/60 uppercase leading-relaxed"
-//         >
-//           We are a creative studio specialized in strategy, branding, design,
-//           and development. Our work lives at the intersection of design and
-//           technology.
-//         </motion.p>
-
-//         {/* Decorative Line */}
-
-//       </div>
-
-//       {/* Bottom Left Scroll */}
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ delay: 0.6 }}
-//         className="absolute bottom-8 left-8 flex items-center gap-2 text-sm text-white/70"
-//       >
-//         <span>Scroll to Explore</span>
-//         <motion.span
-//           animate={{ y: [0, 8, 0] }}
-//           transition={{
-//             duration: 1.5,
-//             repeat: Infinity,
-//             ease: "easeInOut",
-//           }}
-//         >
-//           ⌄
-//         </motion.span>
-//       </motion.div>
-
-//       {/* Bottom Right */}
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ delay: 0.7 }}
-//         className="absolute bottom-8 right-8 text-sm text-white/70"
-//       >
-//         <motion.span
-//           whileHover={{ scale: 1.05 }}
-//           className="cursor-pointer inline-block"
-//         >
-//           Featured Projects
-//         </motion.span>
-//       </motion.div>
-
-//       {/* Floating Decorative Elements */}
-//       <motion.div
-//         className="absolute top-[20%] right-[15%] w-20 h-20 border-2 border-white/10 rounded-xl"
-//         animate={{
-//           rotate: [0, 180, 0],
-//           y: [0, -20, 0],
-//         }}
-//         transition={{
-//           duration: 10,
-//           repeat: Infinity,
-//           ease: "easeInOut",
-//         }}
-//       />
-
-//       <motion.div
-//         className="absolute bottom-[25%] left-[10%] w-16 h-16 border-2 border-white/10 rounded-full"
-//         animate={{
-//           rotate: [0, -180, 0],
-//           scale: [1, 1.1, 1],
-//         }}
-//         transition={{
-//           duration: 8,
-//           repeat: Infinity,
-//           ease: "easeInOut",
-//         }}
-//       />
-//     </section>
-//   );
-// }

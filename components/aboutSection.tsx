@@ -1,5 +1,6 @@
 "use client";
 
+import useScrollSections from "@lib/hooks/useScrollSections";
 import { motion } from "framer-motion";
 
 const skills = [
@@ -10,9 +11,12 @@ const skills = [
 ];
 
 export default function AboutSection() {
+    useScrollSections();
+  
   return (
     <section
-      id="intro"
+      id="about"
+      data-scroll="2"
       className="h-screen flex flex-col justify-center px-8 bg-white text-gray-900"
     >
       <motion.div

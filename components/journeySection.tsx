@@ -129,6 +129,8 @@ const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   return (
     <section
       ref={containerRef}
+      id="journey"
+      data-scroll="3"
       className="relative py-40 px-6 overflow-hidden bg-neutral-950 text-white"
     >
       {/* ---------------- PARALLAX BACKGROUND ---------------- */}

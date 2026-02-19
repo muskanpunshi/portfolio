@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+* {
+  cursor: none;
+  
+}
+::-webkit-scrollbar{
+  display: none !important;
+}
+section,
+main,
+div {
+  isolation: isolate;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -22,10 +35,9 @@ body::before {
 } */
 
 :root {
-  --color-primary: #73202d;
+  --color-primary: #7B0D1E;
   --color-primary-dark: #4a0712;
   --color-accent: #9f1d35;
-
   --color-bg-dark: #0b0b0c;
   --color-bg-soft: #111113;
 
@@ -49,8 +61,7 @@ body {
   --font-primary: var(--font-primary);
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
-  --color-background: var(--color-background);
-  --color-dark-background: var(--color-dark-background);
+ 
   --color-grey: var(--color-grey);
   --color-cms-heading: var(--color-cms-heading);
   --color-cms-primary: var(--color-cms-primary);
